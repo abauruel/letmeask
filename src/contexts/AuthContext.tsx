@@ -8,7 +8,7 @@ type User ={
   }
   
   type AuthContextType = {
-    user: object | undefined;
+    user: User | undefined;
     signInWithGoogle: ()=>Promise<void>;
   }
 
@@ -28,8 +28,8 @@ export function AuthContextProvider(props: AuthContextProviderProps){
         const unsubscribe = auth.onAuthStateChanged(user => {
           if(user){
             const {displayName, photoURL, uid} = user
-            console.log(user)
-            if(!displayName || photoURL){
+           
+            if(!displayName || !photoURL){
               throw new Error('Missing information from Google Account')
             }
       
